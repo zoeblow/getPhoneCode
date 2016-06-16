@@ -1,0 +1,52 @@
+.item {
+    border-bottom: 1px solid #ececec;
+    height: 49px;
+    line-height: 50px;
+}
+a,a:hover{
+    text-decoration: none;
+}
+.item.u-yzm label {
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+   background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoBAMAAAB+0KVeAAAAFVBMVEUAAADs7Ozs7Ozs7Ozs7Ozs7Ozs7OzrFJMPAAAABnRSTlMA8a0nKCWPqJUsAAAATklEQVQoz2OgJwgSS0tLVIXTYMAMZAN5BjAaLMiUBgYKMBosyAjhCMBosCAbhJMAo+kpiOkk3I5ngXjPAUZDPG8ECghlGD0anlQOTzoCABdBimWGEoZQAAAAAElFTkSuQmCC) center left no-repeat ;
+    background-size: 30px 30px;
+    -webkit-background-size: 30px 30px;
+    padding-top: 10px;
+    padding-right: 10px;
+    float: left;
+}
+.u-yzm>.form_input {
+    width: 45%;
+}
+.form_input {
+    font-size: 16px;
+    padding-left: 10px;
+    line-height: 30px;
+    height: 30px;
+    width: 75%;
+    padding-top: 5px;
+    float: left;
+    border: none 0;
+    outline: none 0;
+}
+.ui-btn {
+    display: inline-block;
+    padding: 2px 10px;
+    text-align: center;
+    cursor: pointer;
+}
+.ui-btn-code {
+    height: 24px;
+    line-height: 24px;
+    border: 1px solid #fd6e0e;
+    color: #fd6e0e;
+    border-radius: 15px;
+    font-size: 14px;
+    float: right;
+    margin-top: 5px;
+}
+.ececec{
+    border:1px solid #ccc;
+}

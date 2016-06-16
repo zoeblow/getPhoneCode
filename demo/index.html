@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title>验证码 - 移动端 - </title>
+        <link rel="stylesheet" type="text/css" href="http://ifuyuan.wang/works/web/saoma/static/style/showToast.css" />
+        <script type="text/javascript" src="http://ifuyuan.wang/works/web/saoma/static/script/showToast.js"></script>
+        <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type="text/javascript" src="../dist/script/getPhoneCode.js"></script>
+        <link rel="stylesheet" type="text/css" href="../dist/style/getPhoneCode.css" />
+
+    </head>
+    <body>
+    <div class="item u-yzm e-mt20">
+        <label for="reg-yzm" class="icon"> </label>
+        <input type="text" id="yzm" name="yzm" maxlength="6" class="form_input" placeholder="请输入验证码">
+        <a href="javascript:void(0);" id="getPhoneCode" class="ui-btn ui-btn-code">验证码</a>
+    </div>
+    </body>
+    <script type="text/javascript">
+    var button =  $('body').find('#getPhoneCode');
+    $('#getPhoneCode').getPhoneCode({
+        'time':5, //自定义时间
+        'text':'s', //自定义内容
+        'sendBefore':function(){
+            var data = '18612345678';
+            var yzm = $('body').find('[name="yzm"]');
+            $.ajax({
+                url : 'sendYzm.do',
+                dataType : 'json',
+                type : 'POST',
+                data : data,
+                success : function(res) {
+                    if (res.result === 'success') {
+                        showToast.show('验证码已发送请注意查收');
+                        $(yzm).val('').focus();
+                        button.addClass('ececec');
+                    } else {
+                        showToast.show('发送验证码失败');
+                    }
+                },
+                error : function() {
+                    showToast.show('程序出错，请联系管理员！');
+                }
+            });
+        },
+        'sendAfter':function(){
+            button.text('重发').removeClass('ececec');
+            showToast.show('倒计时已结束');    //结束时执行的回调函数
+        }   
+    });  
+    </script>
+</html>
