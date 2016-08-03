@@ -24,6 +24,7 @@
 		var config = $.extend( defaults, setting || {});
 		var time = config.time;
 		var text = config.text;
+		var _timeRun = null;
 		obj = $(this);
 		obj.each(function(){
 			$(this).bind('click',function(event){
@@ -38,42 +39,40 @@
 				var that = $(this);
 				var val = $(event.target)[0].tagName == 'INPUT' ? that.val() : that.html();
 				var isinput = $(event.target)[0].tagName == 'INPUT' ? true : false;
-				if(isinput){
-						that.val(time + text );		 
-					}
-					else{
-						that.html(time + text );
-					}
-				_timeRun = setInterval(function(){
-					// 加载完成
-					if(time==1){
-						if(isinput){
-							that.val(val);		 
+				console.log(isinput)
+				
+				run = function(){
+					_timeRun = setInterval(function(){
+						// 加载完成
+						if(time==1){
+							if(isinput){
+								that.val(val);		 
+							}
+							else{
+								that.html(val);
+							}
+							time = config.time;
+							clearInterval(_timeRun);
+							that.removeClass('s-dis').removeAttr('disabled');
+							// 引用回调函数
+						  	if (typeof config.sendAfter == 'function') { // 确保类型为函数类型
+								config.sendAfter.call(this); // 执行回调函数
+						  	}
+						  	//返回一个数值等待下一次触发
+							return time;
 						}
-						else{
-							that.html(val);
+						// 加载过程
+						if(time>1){
+							time--;
+							if(isinput){
+								that.val(time + text );		 
+							}
+							else{
+								that.html(time + text );
+							}
 						}
-						time = config.time;
-						clearInterval(_timeRun);
-						that.removeClass('s-dis').removeAttr('disabled');
-						// 引用回调函数
-					  	if (typeof config.sendAfter == 'function') { // 确保类型为函数类型
-							config.sendAfter.call(this); // 执行回调函数
-					  	}
-					  	//返回一个数值等待下一次触发
-						return time;
-					}
-					// 加载过程
-					if(time>1){
-						time--;
-						if(isinput){
-							that.val(time + text );		 
-						}
-						else{
-							that.html(time + text );
-						}
-					}
-				},1000);
+					},1000);
+				}
 			return false;			
 			})
 		})
